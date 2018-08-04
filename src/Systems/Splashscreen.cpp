@@ -17,7 +17,7 @@ namespace orias::scenes {
         phase++;
         const auto &version = config["version"];
         const auto &windowConfig = config["rendering"]["window"];
-        addReaction<fender::events::Shutdown>([this](futils::IMediatorPacket &){
+        addReaction<fengin::events::Shutdown>([this](futils::IMediatorPacket &){
             entityManager->removeSystem(name);
         });
         window = &entityManager->create<Window>(windowConfig["width"].asFloat(),
@@ -25,13 +25,13 @@ namespace orias::scenes {
                                                 windowConfig["title"].asString() + " (version " + version.asString() + ")");
 
         world = &entityManager->create<World>("SplashscreenWorld",
-                                              fender::components::World::Type::Isometric);
+                                              fengin::components::World::Type::Isometric);
 
         camera = &entityManager->create<Camera>(window, "MainCamera");
         input = &entityManager->create<Input>();
         auto &_events = this->events;
         input->on(futils::Keys::Escape, [_events](){
-            _events->send<fender::events::Shutdown>();
+            _events->send<fengin::events::Shutdown>();
         });
 
         window->setVisible(true);

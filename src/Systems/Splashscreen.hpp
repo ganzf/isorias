@@ -6,9 +6,9 @@
 #pragma once
 
 # include "fengin-core/include/events.hpp"
-# include "fender.hpp"
-# include "rendering.hpp"
-# include "inputKeys.hpp"
+# include "fengin-core/include/FenginCore.hpp"
+# include "utils/rendering.hpp"
+# include "utils/inputKeys.hpp"
 
 # include "Entities/Window.hpp"
 # include "Entities/World.hpp"
@@ -21,9 +21,9 @@
 
 namespace orias::scenes {
     using Window = orias::ui::Window;
-    using World = fender::entities::World;
-    using Camera = fender::entities::Camera;
-    using Input = fender::entities::Input;
+    using World = fengin::entities::World;
+    using Camera = fengin::entities::Camera;
+    using Input = fengin::entities::Input;
     using Button = orias::ui::MenuButton;
 
     class Splashscreen : public futils::ISystem {

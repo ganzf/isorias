@@ -1,21 +1,21 @@
-# include "fengin/include/Fengin.hpp"
+# include "fengin-core/include/FenginCore.hpp"
 # include "Systems/Splashscreen.hpp"
 # include "json/Json.hpp"
 
 int main(int, char **av)
 {
-    fender::Fender engine(av[0]);
+    fengin::FenginCore core(av[0]);
     orias::utils::Json config("./config.json");
     auto const &dependencies = config["dependencies"];
 
-    fender::StartParameters params;
+    fengin::StartParameters params;
     params.logWhenLoading = dependencies["logWhenLoading"].asBool();
     params.recursive = dependencies["recursiveLoading"].asBool();
     params.configFilePath = dependencies["directory"].asString();
 
-    if (engine.start(params) != 0)
+    if (core.start(params) != 0)
         return 1;
-    engine.addSystem<orias::scenes::Splashscreen>(config);
-    engine.run();
+    core.addSystem<orias::scenes::Splashscreen>(config);
+    core.run();
     return 0;
 }

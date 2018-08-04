@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <>
+#include <fengin-core/include/events.hpp>
 #include <utils/ecs.hpp>
 #include <json/Json.hpp>
 #include <GameObjects/Game/Player.hpp>
@@ -20,7 +20,7 @@ namespace orias::scenes {
         explicit Game() {
             name = "Game";
             afterBuild = [this](){
-                addReaction<fender::events::Shutdown>([this](futils::IMediatorPacket &){
+                addReaction<fengin::events::Shutdown>([this](futils::IMediatorPacket &){
                     entityManager->removeSystem(name);
                 });
                 this->init();
