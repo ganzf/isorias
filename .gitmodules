@@ -1,0 +1,6 @@
+[submodule "modules/fengin"]
+	path = modules/fengin
+	url = git@github.com:/ganzf/fengin
+[submodule "modules/utils"]
+	path = modules/utils
+	url = git@github.com:/ganzf/utils
