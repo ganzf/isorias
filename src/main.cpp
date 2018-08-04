@@ -12,6 +12,7 @@ int main(int, char **av)
     params.logWhenLoading = dependencies["logWhenLoading"].asBool();
     params.recursive = dependencies["recursiveLoading"].asBool();
     params.configFilePath = dependencies["directory"].asString();
+    params.loadSymlinks = false;
 
     if (core.start(params) != 0)
         return 1;
