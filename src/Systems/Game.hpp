@@ -17,8 +17,9 @@ namespace orias::scenes {
         void init();
         std::vector<orias::game::Tile *> tiles;
         fengin::entities::Camera *cam;
+        fengin::entities::Window *win;
     public:
-        explicit Game(fengin::entities::Camera *cam) : cam(cam) {
+        explicit Game(fengin::entities::Camera *cam, fengin::entities::Window *win) : cam(cam), win(win) {
             name = "Game";
             afterBuild = [this, cam]() {
                 addReaction<fengin::events::Shutdown>([this](futils::IMediatorPacket &) {

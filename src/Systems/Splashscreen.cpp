@@ -28,6 +28,8 @@ namespace orias::scenes {
                                               fengin::components::World::Type::Isometric);
 
         camera = &entityManager->create<Camera>(window, "MainCamera");
+        auto &camPos = camera->get<fengin::components::Transform>();
+        camPos.position.z = 0;
         input = &entityManager->create<Input>();
         auto &_events = this->events;
         input->on(futils::Keys::Escape, [_events](){
@@ -37,7 +39,7 @@ namespace orias::scenes {
             const auto _name = name;
             afterDeath = [this, _name](futils::EntityManager *em){
                 std::cout << "System " + _name + " died." << std::endl;
-                em->addSystem<orias::scenes::Game>(this->camera);
+                em->addSystem<orias::scenes::Game>(this->camera, this->window);
             };
             entityManager->removeSystem(name);
         });
