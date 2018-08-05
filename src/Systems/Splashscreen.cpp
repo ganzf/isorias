@@ -33,19 +33,27 @@ namespace orias::scenes {
         input->on(futils::Keys::Escape, [_events](){
             _events->send<fengin::events::Shutdown>();
         });
+        input->on(futils::Keys::Space, [this, _events](){
+            const auto _name = name;
+            afterDeath = [this, _name](futils::EntityManager *em){
+                std::cout << "System " + _name + " died." << std::endl;
+                em->addSystem<orias::scenes::Game>(this->camera);
+            };
+            entityManager->removeSystem(name);
+        });
 
         window->setVisible(true);
         input->setActivated(true);
         camera->setActivated(true);
 
-        button = &entityManager->smartCreate<Button>("Play", [this](){
-            const auto _name = name;
-            afterDeath = [this, _name](futils::EntityManager *em){
-                std::cout << "System " + _name + " died." << std::endl;
-                em->addSystem<orias::scenes::Game>();
-            };
-            entityManager->removeSystem(name);
-        });
+//        button = &entityManager->smartCreate<Button>("Play", [this](){
+//            const auto _name = name;
+//            afterDeath = [this, _name](futils::EntityManager *em){
+//                std::cout << "System " + _name + " died." << std::endl;
+//                em->addSystem<orias::scenes::Game>(this->camera);
+//            };
+//            entityManager->removeSystem(name);
+//        });
     }
 
     void Splashscreen::run(float) {
