@@ -57,13 +57,13 @@ namespace orias::scenes {
         addReaction<futils::Keys>([this, move, zoom](futils::IMediatorPacket &pkg){
             const auto &key = futils::Mediator::rebuild<futils::Keys>(pkg);
             std::cout << "Received key" << std::endl;
-            if (key == futils::Keys::ArrowLeft)
-                move(1, -1);
-            if (key == futils::Keys::ArrowRight)
-                move(-1, 1);
             if (key == futils::Keys::ArrowUp)
-                move(1, 1);
+                move(1, -1);
             if (key == futils::Keys::ArrowDown)
+                move(-1, 1);
+            if (key == futils::Keys::ArrowLeft)
+                move(1, 1);
+            if (key == futils::Keys::ArrowRight)
                 move(-1, -1);
             if (key == futils::Keys::Q) {
                 zoom(10);
