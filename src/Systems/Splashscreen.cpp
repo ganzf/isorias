@@ -17,7 +17,7 @@ namespace orias::scenes {
         phase++;
         const auto &version = config["version"];
         const auto &windowConfig = config["rendering"]["window"];
-        addReaction<fengin::events::Shutdown>([this](futils::IMediatorPacket &){
+        addReaction<fengin::events::Shutdown>([this](fengin::Event &){
             entityManager->removeSystem(name);
         });
         window = &entityManager->create<Window>(windowConfig["width"].asFloat(),
@@ -37,7 +37,7 @@ namespace orias::scenes {
         });
         input->on(futils::Keys::Space, [this, _events](){
             const auto _name = name;
-            afterDeath = [this, _name](futils::EntityManager *em){
+            afterDeath = [this, _name](fengin::EntityManager *em){
                 std::cout << "System " + _name + " died." << std::endl;
                 em->addSystem<orias::scenes::Game>(this->camera, this->window);
             };

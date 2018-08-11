@@ -6,6 +6,7 @@
 #include <Entities/Window.hpp>
 #include "Game.hpp"
 #include "Components/rigidBody.hpp"
+#include "Components/Billboard.hpp"
 
 namespace orias::scenes {
     void Game::run(float) {
@@ -25,12 +26,19 @@ namespace orias::scenes {
             pos.y = y;
             pos.z = z;
             auto *t = &entityManager->smartCreate<orias::game::Tile>(pos, fengin::vec3f(1, 1, 1));
-            events->send<fengin::components::Transform>(t->get<fengin::components::Transform>());
+//            events->send<fengin::components::Transform>(t->get<fengin::components::Transform>());
             this->tiles.push_back(t);
             return t;
         };
+        auto *billboard = addTile(0, 0, 0.1f);
+        billboard->attach<fengin::components::Billboard>();
+        auto &btr = billboard->get<fengin::components::Transform>();
+        btr.size.z = 1.0f;
+        btr.size.y = 0.1f;
+        btr.position.z = 0.5f;
         for (auto const &tile: map) {
             auto *t = addTile(tile[0].asFloat(), tile[1].asFloat(), tile[2].asFloat());
+            t->get<fengin::components::Transform>().rotation.x = 60;
             auto &onClick = t->get<fengin::components::Clickable>();
             onClick.waitForRelease = true;
             onClick.func = [this, t](){

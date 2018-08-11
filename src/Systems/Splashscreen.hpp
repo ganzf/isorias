@@ -26,7 +26,7 @@ namespace orias::scenes {
     using Input = fengin::entities::Input;
     using Button = orias::ui::MenuButton;
 
-    class Splashscreen : public futils::ISystem {
+    class Splashscreen : public fengin::System {
         int phase{0};
         orias::utils::Json const &config;
         Window *window{nullptr};

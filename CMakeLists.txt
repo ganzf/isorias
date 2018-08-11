@@ -46,8 +46,9 @@ set(SOURCE_FILES
 		)
 
 add_executable(isorias ${SOURCE_FILES})
-include_directories(include modules modules/fengin-base/src)
+include_directories(include modules modules/fengin-base/src libs/soil/src)
 set_target_properties(isorias PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../)
+find_library(SOIL SOIL HINTS ./libs/soil/lib)
 if (UNIX)
 	target_compile_options(isorias PUBLIC -W -Wall -Werror -Wextra -g3)
 	find_library(FENGIN_CORE fengin-core HINTS ./modules/fengin-core/release)

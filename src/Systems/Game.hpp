@@ -6,13 +6,12 @@
 #pragma once
 
 #include <fengin-core/include/events.hpp>
-#include <utils/ecs.hpp>
 #include <json/Json.hpp>
 #include <GameObjects/Game/Tile.hpp>
 #include <fengin-base/src/Entities/Camera.hpp>
 
 namespace orias::scenes {
-    class Game: public futils::ISystem {
+    class Game: public fengin::System {
         int state{0};
         void init();
         std::vector<orias::game::Tile *> tiles;
